@@ -414,7 +414,6 @@
 
                 comp.addEventListener('mouseleave', () => {
                     infoBox.classList.remove('visible');
-                    // We can reset to initial text after a small delay to allow for fade-out
                     setTimeout(() => {
                          infoTitle.textContent = initialInfo.title;
                          infoDesc.textContent = initialInfo.desc;
@@ -441,7 +440,6 @@ document.addEventListener('DOMContentLoaded', function () {
         menu.classList.toggle('hidden');
     });
 
-    // Fecha o menu ao clicar em qualquer link dentro dele
     menu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', function () {
             menu.classList.add('hidden');
