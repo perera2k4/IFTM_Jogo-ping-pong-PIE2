@@ -41,11 +41,11 @@
                     <img class="w-60 items-center" src="./imagens/if-logo-black.png" alt="Logo IFTM">
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#sobre" class="nav-link font-medium text-slate-600">O Projeto</a>
-                    <a href="#hardware" class="nav-link font-medium text-slate-600">Hardware</a>
-                    <a href="#detalhes" class="nav-link font-medium text-slate-600">Detalhes</a>
-                    <a href="#jogar" class="nav-link font-medium text-slate-600">Como Jogar</a>
-                    <a href="#equipe" class="nav-link font-medium text-slate-600">Equipe</a>
+                    <a href="#sobre" class="nav-link font-medium text-slate-600 hover:text-purple-700 border-b-2 border-transparent hover:border-purple-700 transition-colors">O Projeto</a>
+                    <a href="#hardware" class="nav-link font-medium text-slate-600 hover:text-purple-700 border-b-2 border-transparent hover:border-purple-700 transition-colors">Hardware</a>
+                    <a href="#detalhes" class="nav-link font-medium text-slate-600 hover:text-purple-700 border-b-2 border-transparent hover:border-purple-700 transition-colors">Detalhes</a>
+                    <a href="#jogar" class="nav-link font-medium text-slate-600 hover:text-purple-700 border-b-2 border-transparent hover:border-purple-700 transition-colors">Como Jogar</a>
+                    <a href="#equipe" class="nav-link font-medium text-slate-600 hover:text-purple-700 border-b-2 border-transparent hover:border-purple-700 transition-colors">Equipe</a>
                 </div>
                 <div class="md:hidden">
                     <button id="mobile-menu-button" class="p-2 rounded-md text-slate-600 hover:text-cyan-700 hover:bg-slate-100">
@@ -70,7 +70,7 @@
                     <span class="text-green-600">Ping Pong:</span> O primeiro video-game criado
                 </h1>
                 <p class="mt-4 text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">Esta aplicação web apresenta nosso projeto de Ping Pong para Arduino. O objetivo foi criar uma experiência de jogo física e interativa, controlada por dois jogadores. Esta página serve como um relatório dinâmico, demonstrando a construção, os componentes e o funcionamento do jogo.</p>
-                <div class="mt-8 flex justify-center space-x-4>
+                <div class="mt-8 flex justify-center space-x-4">
                     <a href="https://github.com/perera2k4/IFTM_Jogo-ping-pong-PIE2" target="_blank" class="bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-1"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.987 1.029-2.687-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.594 1.028 2.687 0 3.847-2.337 4.695-4.566 4.944.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.749 0 .268.18.579.688.481C19.138 20.2 22 16.448 22 12.021 22 6.484 17.523 2 12 2Z"/></svg>
                         Diretório GitHub
@@ -86,7 +86,7 @@
                 </div>
             </div>
 
-            <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mx-auto animate-fadein-up delay-400">
+            <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mx-auto animate-fadein-up delay-400" >
                 <div class="rounded-xl overflow-hidden shadow-md bg-white flex items-center justify-center p-3">
                     <img src="./imagens/img1.jpg" alt="Foto 1 do projeto" class="rounded-xl object-cover w-full h-48 transition-all duration-200 hover:scale-105 cursor-pointer project-img" data-img="./imagens/img1.jpg">
                 </div>
@@ -354,6 +354,7 @@
                 if (!modal.classList.contains('hidden') && (e.key === 'Escape')) hideModal();
             });
 
+    
             const componentData = {
                 arduino: {
                     title: 'Arduino UNO',
@@ -438,6 +439,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const menu = document.getElementById('mobile-menu');
     btn.addEventListener('click', function () {
         menu.classList.toggle('hidden');
+    });
+
+    // Fecha o menu ao clicar em qualquer link dentro dele
+    menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function () {
+            menu.classList.add('hidden');
+        });
     });
 });
 </script>
