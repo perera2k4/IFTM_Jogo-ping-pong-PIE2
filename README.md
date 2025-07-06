@@ -6,7 +6,7 @@
 </div>
 
 # 🏓 Jogo Ping Pong - IFTM
-[![Preview do site](https://raw.githubusercontent.com/usuario/repositorio/main/imagens/preview.png)](https://seusite.com)
+[![Preview do site](https://raw.githubusercontent.com/perera2k4/IFTM_Jogo-ping-pong-PIE2/refs/heads/main/imagens/preview.png)](https://perera2k4.github.io/IFTM_Jogo-ping-pong-PIE2/)
 
 ## 🎮 Sobre o Projeto
 
