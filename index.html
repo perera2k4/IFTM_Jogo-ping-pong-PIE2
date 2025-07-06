@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Ping Pong - IFTM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        .scroll-smooth { scroll-behavior: smooth; }
+        .transition-all { transition: all 0.3s ease-in-out; }
+        .info-card {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .info-card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .component:hover .component-label {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .component-label {
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased scroll-smooth">
+    <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <img class="w-60 items-center" src="./imagens/if-logo-black.png" alt="Logo IFTM">
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#sobre" class="nav-link font-medium text-slate-600">O Projeto</a>
+                    <a href="#hardware" class="nav-link font-medium text-slate-600">Hardware</a>
+                    <a href="#detalhes" class="nav-link font-medium text-slate-600">Detalhes</a>
+                    <a href="#jogar" class="nav-link font-medium text-slate-600">Como Jogar</a>
+                    <a href="#equipe" class="nav-link font-medium text-slate-600">Equipe</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="p-2 rounded-md text-slate-600 hover:text-cyan-700 hover:bg-slate-100">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden py-4">
+                <a href="#sobre" class="block py-2 px-4 text-sm text-slate-600 hover:bg-cyan-50 rounded">O Projeto</a>
+                <a href="#hardware" class="block py-2 px-4 text-sm text-slate-600 hover:bg-cyan-50 rounded">Hardware</a>
+                <a href="#detalhes" class="block py-2 px-4 text-sm text-slate-600 hover:bg-cyan-50 rounded">Detalhes</a>
+                <a href="#jogar" class="block py-2 px-4 text-sm text-slate-600 hover:bg-cyan-50 rounded">Como Jogar</a>
+                <a href="#equipe" class="block py-2 px-4 text-sm text-slate-600 hover:bg-cyan-50 rounded">Equipe</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <section id="inicio" class="py-20" data-aos="fade-up">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900">
+                    <span class="text-green-600">Ping Pong:</span> O primeiro video-game criado
+                </h1>
+                <p class="mt-4 text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">Esta aplicação web apresenta nosso projeto de Ping Pong para Arduino. O objetivo foi criar uma experiência de jogo física e interativa, controlada por dois jogadores. Esta página serve como um relatório dinâmico, demonstrando a construção, os componentes e o funcionamento do jogo.</p>
+                <div class="mt-8 flex justify-center space-x-4">
+                    <a href="https://github.com/perera2k4/IFTM_Jogo-ping-pong-PIE2" target="_blank" class="bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 mr-1"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.987 1.029-2.687-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.594 1.028 2.687 0 3.847-2.337 4.695-4.566 4.944.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.749 0 .268.18.579.688.481C19.138 20.2 22 16.448 22 12.021 22 6.484 17.523 2 12 2Z"/></svg>
+                        Diretório GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="sobre" class="mb-20 scroll-mt-24">
+            <div class="bg-slate-900 rounded-xl shadow-2xl overflow-hidden mx-auto animate-fadein-up delay-300">
+                <div class="aspect-w-16 aspect-h-9">
+                    <iframe width="100%" height="720px" src="https://www.youtube.com/embed/fGhpaHvAv5s" title="PIE 2: Jogo ping-pong em Arduino" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mx-auto animate-fadein-up delay-400">
+                <div class="rounded-xl overflow-hidden shadow-md bg-white flex items-center justify-center p-3">
+                    <img src="./imagens/img1.jpg" alt="Foto 1 do projeto" class="rounded-xl object-cover w-full h-48 transition-all duration-200 hover:scale-105 cursor-pointer project-img" data-img="./imagens/img1.jpg">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-md bg-white flex items-center justify-center p-3">
+                    <img src="./imagens/img2.jpg" alt="Foto 2 do projeto" class="rounded-xl object-cover w-full h-48 transition-all duration-200 hover:scale-105 cursor-pointer project-img" data-img="./imagens/img2.jpg">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-md bg-white flex items-center justify-center p-3">
+                    <img src="./imagens/img3.jpg" alt="Foto 3 do projeto" class="rounded-xl object-cover w-full h-48 transition-all duration-200 hover:scale-105 cursor-pointer project-img" data-img="./imagens/img3.jpg">
+                </div>
+                <div class="rounded-xl overflow-hidden shadow-md bg-white flex items-center justify-center p-3">
+                    <img src="./imagens/img4.jpg" alt="Foto 4 do projeto" class="rounded-xl object-cover w-full h-48 transition-all duration-200 hover:scale-105 cursor-pointer project-img" data-img="./imagens/img4.jpg">
+                </div>
+            </div>
+            <div id="img-modal" class="fixed inset-0 z-[9999] bg-black/80 flex items-center justify-center hidden">
+                <button id="close-modal" class="absolute top-6 right-6 bg-white/80 hover:bg-white text-slate-800 rounded-full p-2 shadow-lg focus:outline-none" aria-label="Fechar imagem">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+                <img id="modal-img" src="" alt="Imagem ampliada do projeto" class="max-h-[80vh] max-w-[90vw] rounded-xl shadow-2xl border-4 border-white object-contain">
+            </div>
+            </div>
+        </section>
+    <style>
+        @keyframes fadein-up {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadein-up {
+            opacity: 0;
+            transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+            will-change: opacity, transform;
+        }
+        .fadein-up-visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            animation: fadein-up 0.9s cubic-bezier(.4,0,.2,1) both;
+        }
+        .delay-100 { transition-delay: .1s; }
+        .delay-200 { transition-delay: .2s; }
+        .delay-300 { transition-delay: .3s; }
+        .delay-400 { transition-delay: .4s; }
+        html { scroll-behavior: smooth; }
+    </style>
+    <script>
+    // Fade-in on scroll for .animate-fadein-up
+    document.addEventListener('DOMContentLoaded', function () {
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.animate-fadein-up');
+            const windowHeight = window.innerHeight;
+            reveals.forEach(function (el) {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight * 0.92) {
+                    el.classList.add('fadein-up-visible');
+                }
+            });
+        }
+        revealOnScroll();
+        window.addEventListener('scroll', revealOnScroll);
+    });
+    </script>
+
+        <section id="hardware" class="mb-20 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2">Hardware Interativo</h2>
+                <p class="max-w-3xl mx-auto text-slate-600">
+                    Passe o mouse sobre os componentes do diagrama abaixo para ver seus detalhes, incluindo a função e o pino de conexão no Arduino. Esta visualização substitui tabelas estáticas por uma exploração interativa do nosso setup.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg relative h-[500px]">
+                    <div class="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-4 p-8">
+                        <div id="comp-arduino" data-component="arduino" class="component row-span-3 col-start-2 flex flex-col items-center justify-center bg-cyan-100/50 border-2 border-dashed border-cyan-300 rounded-lg p-4 cursor-pointer">
+                            <div class="text-5xl">🤖</div>
+                            <span class="font-bold mt-2 text-cyan-800">Arduino UNO</span>
+                            <span class="component-label text-xs text-center text-cyan-600">O cérebro do projeto</span>
+                        </div>
+
+                        <div id="comp-j1" data-component="jogador1" class="component flex flex-col items-center justify-center bg-slate-100 rounded-lg p-4 cursor-pointer">
+                            <div class="text-4xl">🕹️</div>
+                            <span class="font-bold mt-2 text-slate-700">Jogador 1</span>
+                             <span class="component-label text-xs text-center text-slate-500">Potenciômetro</span>
+                        </div>
+
+                        <div id="comp-oled" data-component="oled" class="component col-start-1 row-start-2 flex flex-col items-center justify-center bg-slate-100 rounded-lg p-4 cursor-pointer">
+                            <div class="text-4xl">📺</div>
+                            <span class="font-bold mt-2 text-slate-700">Display OLED</span>
+                            <span class="component-label text-xs text-center text-slate-500">Exibe o jogo</span>
+                        </div>
+
+                        <div id="comp-j2" data-component="jogador2" class="component col-start-3 row-start-1 flex flex-col items-center justify-center bg-slate-100 rounded-lg p-4 cursor-pointer">
+                             <div class="text-4xl">🕹️</div>
+                             <span class="font-bold mt-2 text-slate-700">Jogador 2</span>
+                             <span class="component-label text-xs text-center text-slate-500">Potenciômetro</span>
+                        </div>
+
+                        <div id="comp-buzzer" data-component="buzzer" class="component col-start-3 row-start-2 flex flex-col items-center justify-center bg-slate-100 rounded-lg p-4 cursor-pointer">
+                             <div class="text-4xl">🔊</div>
+                             <span class="font-bold mt-2 text-slate-700">Buzzer</span>
+                             <span class="component-label text-xs text-center text-slate-500">Efeitos sonoros</span>
+                        </div>
+
+                        <div id="comp-botoes" data-component="botoes" class="component col-start-3 row-start-3 flex flex-col items-center justify-center bg-slate-100 rounded-lg p-4 cursor-pointer">
+                            <div class="text-4xl">🔘</div>
+                             <span class="font-bold mt-2 text-slate-700">Botões</span>
+                             <span class="component-label text-xs text-center text-slate-500">Pausa / Reset</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="h-full">
+                    <div id="info-box" class="info-card bg-cyan-700 text-white rounded-xl shadow-lg p-6 h-full flex flex-col justify-center">
+                        <h3 id="info-title" class="text-2xl font-bold mb-2 text-cyan-100">Componente</h3>
+                        <p id="info-desc" class="text-cyan-200 mb-4">Passe o mouse sobre um componente para ver os detalhes.</p>
+                        <div class="bg-cyan-800/50 rounded p-3">
+                            <p class="text-sm font-semibold text-cyan-100">Conexão no Arduino</p>
+                            <p id="info-pin" class="font-mono text-lg text-white">N/A</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="detalhes" class="mb-20 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2">Detalhes Técnicos</h2>
+                 <p class="max-w-3xl mx-auto text-slate-600">
+                    O projeto combina uma lógica de software robusta com funcionalidades que criam uma experiência de jogo completa e agradável. Aqui estão os principais destaques técnicos e as bibliotecas que tornaram tudo possível.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <h3 class="text-2xl font-bold mb-4">Funcionalidades Principais</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start"><span class="text-cyan-500 mr-3 mt-1">✓</span><span><strong>Controle Intuitivo:</strong> Raquetes controladas suavemente por potenciômetros.</span></li>
+                        <li class="flex items-start"><span class="text-cyan-500 mr-3 mt-1">✓</span><span><strong>Feedback Sonoro:</strong> Sons para rebotes, pontos e eventos de jogo aumentam a imersão.</span></li>
+                        <li class="flex items-start"><span class="text-cyan-500 mr-3 mt-1">✓</span><span><strong>Gerenciamento de Jogo:</strong> Funções de pausa e reinício para total controle da partida.</span></li>
+                        <li class="flex items-start"><span class="text-cyan-500 mr-3 mt-1">✓</span><span><strong>Tela de Créditos:</strong> Uma tela inicial apresenta a equipe de desenvolvimento.</span></li>
+                        <li class="flex items-start"><span class="text-cyan-500 mr-3 mt-1">✓</span><span><strong>Lógica de Colisão Precisa:</strong> O código detecta com exatidão as colisões da bola.</span></li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                     <h3 class="text-2xl font-bold mb-4">Bibliotecas Utilizadas</h3>
+                     <p class="text-slate-600 mb-4">Para a renderização gráfica no display OLED, utilizamos duas bibliotecas essenciais da Adafruit:</p>
+                    <div class="space-y-4">
+                        <div class="bg-slate-100 p-4 rounded-lg">
+                            <p class="font-mono font-semibold text-slate-800">Adafruit GFX Library</p>
+                            <p class="text-sm text-slate-600">Biblioteca gráfica principal com funções de desenho.</p>
+                        </div>
+                        <div class="bg-slate-100 p-4 rounded-lg">
+                            <p class="font-mono font-semibold text-slate-800">Adafruit SSD1306</p>
+                            <p class="text-sm text-slate-600">Driver específico para o nosso modelo de display OLED.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="jogar" class="mb-12 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2">Como Jogar</h2>
+                 <p class="max-w-3xl mx-auto text-slate-600">
+                    Jogar é simples e intuitivo. Siga os passos abaixo para começar a partida. O objetivo é ser o primeiro a marcar 5 pontos!
+                </p>
+            </div>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-4xl mb-3">1️⃣</div>
+                    <h3 class="text-xl font-bold mb-2">Movimente a Raquete</h3>
+                    <p class="text-slate-600">Gire o potenciômetro ou joystick para mover sua raquete verticalmente.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-4xl mb-3">2️⃣</div>
+                    <h3 class="text-xl font-bold mb-2">Pause e Reinicie</h3>
+                    <p class="text-slate-600">Use os botões dedicados para pausar/retomar ou reiniciar o jogo a qualquer momento.</p>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="text-4xl mb-3">3️⃣</div>
+                    <h3 class="text-xl font-bold mb-2">Marque Pontos</h3>
+                    <p class="text-slate-600">Rebata a bola e tente passar pela raquete do seu oponente para marcar.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="equipe" class="py-16 sm:py-24 ">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="text-center">
+                    <h2 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">A equipe por trás do projeto</h2>
+                    <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">Este projeto foi desenvolvido com a colaboração e dedicação dos seguintes estudantes</p>
+                </div>
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="text-center bg-slate-50 p-8 rounded-xl border border-slate-200/80">
+                      <img class="mx-auto h-24 w-24 rounded-full bg-purple-200 flex items-center justify-center text-3xl font-bold text-purple-700" src="./imagens/autores/bruno-pereira.jpg" alt="Bruno Pereira">
+                      <h3 class="mt-6 text-xl font-bold text-slate-900">Bruno Pereira</h3>
+                    </div>
+                    <div class="text-center bg-slate-50 p-8 rounded-xl border border-slate-200/80">
+                      <img class="mx-auto h-24 w-24 rounded-full bg-purple-200 flex items-center justify-center text-3xl font-bold text-purple-700" src="./imagens/autores/diogenes.jpg" alt="Diogenes">
+                      <h3 class="mt-6 text-xl font-bold text-slate-900">Diógenes Cassimiro</h3>
+                    </div>
+                    <div class="text-center bg-slate-50 p-8 rounded-xl border border-slate-200/80">
+                      <img class="mx-auto h-24 w-24 rounded-full bg-purple-200 flex items-center justify-center text-3xl font-bold text-purple-700" src="./imagens/autores/andreza.png" alt="Andreza">
+                      <h3 class="mt-6 text-xl font-bold text-slate-900">Andreza Guimarães</h3>
+                    </div>
+                    <div class="text-center bg-slate-50 p-8 rounded-xl border border-slate-200/80">
+                      <img class="mx-auto h-24 w-24 rounded-full bg-purple-200 flex items-center justify-center text-3xl font-bold text-purple-700" src="./imagens/autores/arthur.png" alt="Arthur">
+                      <h3 class="mt-6 text-xl font-bold text-slate-900">Arthur Paiva</h3>
+                    </div>
+                    <div class="text-center bg-slate-50 p-8 rounded-xl border border-slate-200/80">
+                      <img class="mx-auto h-24 w-24 rounded-full bg-purple-200 flex items-center justify-center text-3xl font-bold text-purple-700" src="./imagens/autores/bruno-medeiros.png" alt="Bruno Medeiros">
+                      <h3 class="mt-6 text-xl font-bold text-slate-900">Bruno Medeiros</h3>
+                    </div>
+                    <div class="text-center bg-slate-50 p-8 rounded-xl border border-slate-200/80">
+                      <img class="mx-auto h-24 w-24 rounded-full bg-purple-200 flex items-center justify-center text-3xl font-bold text-purple-700" src="./imagens/autores/jose.jpg" alt="Jose">
+                      <h3 class="mt-6 text-xl font-bold text-slate-900">Jose Vitor</h3>
+                    </div>
+                    <div class="text-center bg-slate-50 p-8 rounded-xl border border-slate-200/80">
+                      <img class="mx-auto h-24 w-24 rounded-full bg-purple-200 flex items-center justify-center text-3xl font-bold text-purple-700" src="./imagens/autores/luis.jpg" alt="Luis">
+                      <h3 class="mt-6 text-xl font-bold text-slate-900">Luis Dib</h3>
+                    </div>
+                    <div class="text-center bg-slate-50 p-8 rounded-xl border border-slate-200/80">
+                      <img class="mx-auto h-24 w-24 rounded-full bg-purple-200 flex items-center justify-center text-3xl font-bold text-purple-700" src="./imagens/autores/vitor.jpg" alt="Vitor">
+                      <h3 class="mt-6 text-xl font-bold text-slate-900">Vitor Xavier</h3>
+                    </div>
+                </div>
+            </div>
+          </section>
+    </main>
+
+    <footer class="bg-slate-800 text-white">
+        <div class="container mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center">
+          <p class="font-bold text-lg">Projeto Integrador Extensionista II</p>
+          <p class="text-slate-300">IFTM - Campus Ituiutaba | Análise e Desenvolvimento de Sistemas</p>
+          <p class="mt-4 text-sm text-slate-400">&copy; 2024 Todos os direitos reservados.</p>
+        </div>
+      </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Modal de Imagem Ampliada
+            const imgs = document.querySelectorAll('.project-img');
+            const modal = document.getElementById('img-modal');
+            const modalImg = document.getElementById('modal-img');
+            const closeModal = document.getElementById('close-modal');
+            let lastScrollY = 0;
+
+            imgs.forEach(img => {
+                img.addEventListener('click', (e) => {
+                    modalImg.src = img.dataset.img;
+                    modal.classList.remove('hidden');
+                    lastScrollY = window.scrollY;
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            function hideModal() {
+                modal.classList.add('hidden');
+                modalImg.src = '';
+                document.body.style.overflow = '';
+            }
+
+            closeModal.addEventListener('click', hideModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) hideModal();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (!modal.classList.contains('hidden') && (e.key === 'Escape')) hideModal();
+            });
+
+            // ...existing code...
+            const componentData = {
+                arduino: {
+                    title: 'Arduino UNO',
+                    description: 'O microcontrolador que serve como cérebro do projeto, executando toda a lógica do jogo.',
+                    pin: 'Vários'
+                },
+                jogador1: {
+                    title: 'Controle Jogador 1',
+                    description: 'Um potenciômetro (ou joystick) que controla o movimento da raquete da direita.',
+                    pin: 'A1 (Analógico)'
+                },
+                jogador2: {
+                    title: 'Controle Jogador 2',
+                    description: 'Um potenciômetro (ou joystick) que controla o movimento da raquete da esquerda.',
+                    pin: 'A0 (Analógico)'
+                },
+                oled: {
+                    title: 'Display OLED SSD1306',
+                    description: 'Tela de 128x64 pixels que exibe o campo, a bola, as raquetes e a pontuação.',
+                    pin: 'SDA / SCL (I2C)'
+                },
+                buzzer: {
+                    title: 'Emissor de Som (Buzzer)',
+                    description: 'Cria os efeitos sonoros para rebotes, pontos, início e fim de jogo.',
+                    pin: 'D12 (Digital)'
+                },
+                botoes: {
+                    title: 'Botões de Controle',
+                    description: 'Botões físicos para pausar/retomar o jogo e para resetar a partida.',
+                    pin: 'D3, D4, D5 (Digital)'
+                },
+            };
+
+            const infoBox = document.getElementById('info-box');
+            const infoTitle = document.getElementById('info-title');
+            const infoDesc = document.getElementById('info-desc');
+            const infoPin = document.getElementById('info-pin');
+            const components = document.querySelectorAll('.component');
+            const initialInfo = {
+                title: infoTitle.textContent,
+                desc: infoDesc.textContent,
+                pin: infoPin.textContent
+            };
+
+            components.forEach(comp => {
+                comp.addEventListener('mouseenter', () => {
+                    const componentId = comp.dataset.component;
+                    const data = componentData[componentId];
+
+                    if (data) {
+                        infoTitle.textContent = data.title;
+                        infoDesc.textContent = data.description;
+                        infoPin.textContent = data.pin;
+                        infoBox.classList.add('visible');
+                    }
+                });
+
+                comp.addEventListener('mouseleave', () => {
+                    infoBox.classList.remove('visible');
+                    // We can reset to initial text after a small delay to allow for fade-out
+                    setTimeout(() => {
+                         infoTitle.textContent = initialInfo.title;
+                         infoDesc.textContent = initialInfo.desc;
+                         infoPin.textContent = initialInfo.pin;
+                    }, 200);
+                });
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

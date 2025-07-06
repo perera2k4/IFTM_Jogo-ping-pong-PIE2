@@ -19,16 +19,11 @@ Este é um jogo de Ping Pong para Arduino, onde dois jogadores controlam as raqu
 
 ## 🎥 Demonstração
 
-<p align="center">
-  
-</p>
-
 <div align="center">
-
   <table>
     <tr>
         <a href="https://youtu.be/fGhpaHvAv5s" target="_blank">
-            <img src="https://img.youtube.com/vi/fGhpaHvAv5s/0.jpg" alt="Vídeo de Demonstração" width="600"/>
+            <img src="https://img.youtube.com/vi/fGhpaHvAv5s/0.jpg" target="_blank" alt="Vídeo de Demonstração" width="600"/>
         </a>
     </tr>
     <tr>
